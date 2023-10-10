@@ -1,7 +1,10 @@
-import { test, expect } from '@playwright/experimental-ct-react';
+import { test, expect } from './fixtures/fixtures';
 import { Display } from './../src/Display';
 
-test('should work', async ({ mount }) => {
-  const component = await mount(<Display text="Hello" />);
-  await expect(component).toContainText('Hello');
+test.beforeEach(async ({ displayPage }) => {
+  await displayPage.mount(<Display text="Hello" />);
+})
+
+test('should work', async ({ displayPage }) => {
+  await displayPage.hasText("Hello")
 });
