@@ -11,16 +11,9 @@ interface MountResult extends Locator {
 
 export class DisplayPage {
 
-  private component?: MountResult;
-
-  public constructor(private mountParent: MountType) {}
-
-  public async mount(element: Element) {
-    this.component = await this.mountParent(element);
-  }
+  public constructor(private component: MountResult) {}
 
   public async hasText(text: string) {
-    if (!this.component) throw new Error("Call this.mount before");
     await expect(this.component).toHaveText(text);
   }
 
